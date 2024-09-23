@@ -12,6 +12,24 @@
             padding: 1rem;
             height: 60px;
         }
+        .table-container {
+            display: flex;
+            justify-content: space-around;
+        }
+        .status-sim {
+            width: 20px;
+            height: 20px;
+            background-color: green;
+            display: inline-block;
+            border-radius: 3px; /* para um efeito mais suave */
+        }
+        .status-nao {
+            width: 20px;
+            height: 20px;
+            background-color: red;
+            display: inline-block;
+            border-radius: 3px; /* para um efeito mais suave */
+        }
     </style>
 </head>
 <body>
@@ -20,27 +38,58 @@
     </header>
 
     <section class="container my-5">
-        <?php
-        include 'conexao.php';
+        <div class="table-container">
+            <!-- Tabela Ícaro -->
+            <div>
+                <h2 class="text-center">Convidados de Ícaro</h2>
+                <?php
+                include 'conexao.php';
 
-        $sql = "SELECT * FROM convidados ORDER BY Nome";
-        $resultado = mysqli_query($conexao, $sql);
+                $sql_icaro = "SELECT Nome, Parentesco, Familia, Confirmado FROM convidados WHERE Noivo = 0 ORDER BY Familia";
+                $resultado_icaro = mysqli_query($conexao, $sql_icaro);
 
-        if (mysqli_num_rows($resultado) > 0) {
-            echo '<table class="table table-striped">';
-            echo '<thead><tr><th>ID</th><th>Nome</th></tr></thead>';
-            echo '<tbody>';
-            while($row = mysqli_fetch_assoc($resultado)) {
-                echo '<tr><td>' . $row["idConvidados"] . '</td><td>' . $row["Nome"] . '</td></tr>';
-            }
-            echo '</tbody>';
-            echo '</table>';
-        } else {
-            echo '<p class="text-center">Nenhum convidado encontrado.</p>';
-        }
+                if (mysqli_num_rows($resultado_icaro) > 0) {
+                    echo '<table class="table table-striped">';
+                    echo '<thead><tr><th>Nome</th><th>Parentesco</th><th>Família</th><th>Confirmado</th></tr></thead>';
+                    echo '<tbody>';
+                    while($row = mysqli_fetch_assoc($resultado_icaro)) {
+                        $status = $row["Confirmado"] == 1 ? '<div class="status-sim"></div>' : '<div class="status-nao"></div>';
+                        echo '<tr><td>' . $row["Nome"] . '</td><td>' . $row["Parentesco"] . '</td><td>' . $row["Familia"] . '</td><td>' . $status . '</td></tr>';
+                    }
+                    echo '</tbody>';
+                    echo '</table>';
+                } else {
+                    echo '<p class="text-center">Nenhum convidado encontrado.</p>';
+                }
+                ?>
+            </div>
 
-        mysqli_close($conexao);
-        ?>
+            <!-- Tabela Tati -->
+            <div>
+                <h2 class="text-center">Convidados de Tati</h2>
+                <?php
+                $sql_tati = "SELECT Nome, Parentesco, Familia, Confirmado FROM convidados WHERE Noivo = 1 ORDER BY Familia";
+                $resultado_tati = mysqli_query($conexao, $sql_tati);
+
+                if (mysqli_num_rows($resultado_tati) > 0) {
+                    echo '<table class="table table-striped">';
+                    echo '<thead><tr><th>Nome</th><th>Parentesco</th><th>Família</th><th>Confirmado</th></tr></thead>';
+                    echo '<tbody>';
+                    while($row = mysqli_fetch_assoc($resultado_tati)) {
+                        $status = $row["Confirmado"] == 1 ? '<div class="status-sim"></div>' : '<div class="status-nao"></div>';
+                        echo '<tr><td>' . $row["Nome"] . '</td><td>' . $row["Parentesco"] . '</td><td>' . $row["Familia"] . '</td><td>' . $status . '</td></tr>';
+                    }
+                    echo '</tbody>';
+                    echo '</table>';
+                } else {
+                    echo '<p class="text-center">Nenhum convidado encontrado.</p>';
+                }
+
+                mysqli_close($conexao);
+                ?>
+            </div>
+        </div>
+
         <div class="text-center mt-4">
             <a href="index.html" class="btn btn-secondary btn-lg-custom">Voltar para a Página Inicial</a>
         </div>
