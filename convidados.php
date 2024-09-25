@@ -91,7 +91,7 @@
         </div>
 
         <div class="text-center mt-4">
-            <a href="index.html" class="btn btn-secondary btn-lg-custom">Voltar para a Página Inicial</a>
+            <a href="noivos.php" class="btn btn-secondary btn-lg-custom">Voltar para a Página Inicial</a>
         </div>
     </section>
 

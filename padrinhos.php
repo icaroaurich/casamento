@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Padrinhos</title>
+    <title>Lista de Padrinhos</title>
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
@@ -12,37 +12,67 @@
             padding: 1rem;
             height: 60px;
         }
+        .table-container {
+            display: flex;
+            justify-content: space-around;
+        }
     </style>
 </head>
 <body>
     <header class="bg-light text-center py-5">
-        <h1 class="display-4">Padrinhos</h1>
+        <h1 class="display-4">Lista de Padrinhos</h1>
+        <a href="noivos.php" class="btn btn-secondary mb-3">Voltar para Noivos</a>
     </header>
 
     <section class="container my-5">
-        <?php
-        include 'conexao.php';
+        <div class="table-container">
+            <!-- Coluna Ícaro -->
+            <div>
+                <h2 class="text-center">Padrinhos de Ícaro</h2>
+                <?php
+                include 'conexao.php';
 
-        $sql = "SELECT * FROM padrinhos ORDER BY Nome";
-        $resultado = mysqli_query($conexao, $sql);
+                $sql_icaro = "SELECT Nome FROM padrinhos WHERE Noivo = 0 ORDER BY idPadrinhos";
+                $resultado_icaro = mysqli_query($conexao, $sql_icaro);
 
-        if (mysqli_num_rows($resultado) > 0) {
-            echo '<table class="table table-striped">';
-            echo '<thead><tr><th>ID</th><th>Nome</th></tr></thead>';
-            echo '<tbody>';
-            while($row = mysqli_fetch_assoc($resultado)) {
-                echo '<tr><td>' . $row["idPadrinhos"] . '</td><td>' . $row["Nome"] . '</td></tr>';
-            }
-            echo '</tbody>';
-            echo '</table>';
-        } else {
-            echo '<p class="text-center">Nenhum padrinho encontrado.</p>';
-        }
+                if (mysqli_num_rows($resultado_icaro) > 0) {
+                    echo '<table class="table table-striped">';
+                    echo '<thead><tr><th>Nome</th></tr></thead>';
+                    echo '<tbody>';
+                    while($row = mysqli_fetch_assoc($resultado_icaro)) {
+                        echo '<tr><td>' . $row["Nome"] . '</td></tr>';
+                    }
+                    echo '</tbody>';
+                    echo '</table>';
+                } else {
+                    echo '<p class="text-center">Nenhum padrinho encontrado.</p>';
+                }
+                ?>
+            </div>
 
-        mysqli_close($conexao);
-        ?>
-        <div class="text-center mt-4">
-            <a href="index.html" class="btn btn-secondary btn-lg-custom">Voltar para a Página Inicial</a>
+            <!-- Coluna Tati -->
+            <div>
+                <h2 class="text-center">Padrinhos de Tati</h2>
+                <?php
+                $sql_tati = "SELECT Nome FROM padrinhos WHERE Noivo = 1 ORDER BY idPadrinhos";
+                $resultado_tati = mysqli_query($conexao, $sql_tati);
+
+                if (mysqli_num_rows($resultado_tati) > 0) {
+                    echo '<table class="table table-striped">';
+                    echo '<thead><tr><th>Nome</th></tr></thead>';
+                    echo '<tbody>';
+                    while($row = mysqli_fetch_assoc($resultado_tati)) {
+                        echo '<tr><td>' . $row["Nome"] . '</td></tr>';
+                    }
+                    echo '</tbody>';
+                    echo '</table>';
+                } else {
+                    echo '<p class="text-center">Nenhum padrinho encontrado.</p>';
+                }
+
+                mysqli_close($conexao);
+                ?>
+            </div>
         </div>
     </section>
 
