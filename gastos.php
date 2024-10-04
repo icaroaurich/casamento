@@ -33,6 +33,7 @@ if (mysqli_num_rows($result) > 0) {
                         <th>ID</th>
                         <th>Gastos</th>
                         <th>Valor</th>
+						<th>Meio Pagamento</th>
                     </tr>
                 </thead>
                 <tbody>';
@@ -52,6 +53,7 @@ if (mysqli_num_rows($result) > 0) {
                 <td>' . htmlspecialchars($row['idGastos']) . '</td>
                 <td>' . htmlspecialchars($row['Gastos']) . '</td>
                 <td>' . htmlspecialchars($valorFormatado) . '</td>
+				<td>' . htmlspecialchars($row['Meio pagamento']) . '</td>
               </tr>';
     }
 

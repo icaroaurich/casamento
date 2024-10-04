@@ -6,15 +6,61 @@
     <title>Enviar Mensagem</title>
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Fonte manuscrita para os noivos -->
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
     <style>
+        /* Estilo adicional para botões maiores */
+        .btn-lg-custom {
+            font-size: 1.25rem;
+            padding: 1rem;
+            height: 80px; /* Altura maior dos botões */
+        }
+
+        /* Fundo branco para simplicidade e pureza */
+        body {
+            background-color: #ffffff; /* Branco puro */
+        }
+
+        /* Cabeçalho com champagne para sofisticação */
+        header {
+            background-color: #f5deb3; /* Champagne */
+            color: #000; /* Cor do texto do cabeçalho em preto */
+        }
+
+        /* Destaque no nome dos noivos */
+        h1 {
+            font-family: 'Great Vibes', cursive; /* Fonte manuscrita */
+            color: #000; /* Nome dos noivos em preto */
+            font-size: 6rem; /* Tamanho ainda maior para destaque */
+        }
+
         .error {
             color: red;
+        }
+
+        /* Rodapé com verde suave para equilíbrio */
+        footer {
+            background-color: #e0eee0; /* Verde suave */
+            color: #000;
+        }
+
+        /* Seções com toques de cinza claro/prata para elegância discreta */
+        section {
+            background-color: #f0f0f0; /* Cinza claro */
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Aumentando o espaçamento entre os blocos de botões */
+        .mb-3 {
+            margin-bottom: 1.5rem !important;
         }
     </style>
 </head>
 <body>
-    <header class="bg-light text-center py-5">
-        <h1 class="display-4">Enviar Mensagem</h1>
+    <header class="text-center py-5">
+        <h1 class="display-1">Enviar Mensagem</h1>
     </header>
 
     <section class="container my-5">

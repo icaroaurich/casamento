@@ -9,7 +9,7 @@
 </head>
 <body>
     <header class="bg-light text-center py-5">
-        <h1 class="display-4">Lista Especial</h1>
+        <h1 class="display-4">Lista Pagens</h1>
         <a href="noivos.php" class="btn btn-secondary mb-3">Voltar para Noivos</a>
     </header>
 
@@ -18,15 +18,15 @@
             <?php
             include 'conexao.php';
 
-            $sql = "SELECT Nome FROM especial ORDER BY Nome";
+            $sql = "SELECT Nome,Papel FROM especial ORDER BY Nome";
             $resultado = mysqli_query($conexao, $sql);
 
             if (mysqli_num_rows($resultado) > 0) {
                 echo '<table class="table table-striped">';
-                echo '<thead><tr><th>Nome</th></tr></thead>';
+                echo '<thead><tr><th>Nome</th><th>Papel</th></tr></thead>';
                 echo '<tbody>';
                 while($row = mysqli_fetch_assoc($resultado)) {
-                    echo '<tr><td>' . $row["Nome"] . '</td></tr>';
+                    echo '<tr><td>' . $row["Nome"] . '</td><td>' . $row["Papel"] . '</td></tr>';
                 }
                 echo '</tbody>';
                 echo '</table>';

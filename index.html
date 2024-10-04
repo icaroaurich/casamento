@@ -3,29 +3,35 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ícaro e Tati</title>
+    <title>Icaro e Tati</title>
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Fonte manuscrita para os noivos -->
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
     <style>
         /* Estilo adicional para botões maiores */
         .btn-lg-custom {
             font-size: 1.25rem;
             padding: 1rem;
-            height: 60px;
+            height: 80px; /* Altura maior dos botões */
         }
 
-        /* Cores temáticas em tons de rosa */
+        /* Fundo branco para simplicidade e pureza */
         body {
-            background-color: #ffe4e1;
+            background-color: #ffffff; /* Branco puro */
         }
 
+        /* Cabeçalho com champagne para sofisticação */
         header {
-            background-color: #ffcccb;
+            background-color: #f5deb3; /* Champagne */
             color: #000; /* Cor do texto do cabeçalho em preto */
         }
 
+        /* Destaque no nome dos noivos */
         h1 {
-            color: #000; /* Cor do título em preto */
+            font-family: 'Great Vibes', cursive; /* Fonte manuscrita */
+            color: #000; /* Nome dos noivos em preto */
+            font-size: 6rem; /* Tamanho ainda maior para destaque */
         }
 
         p.lead {
@@ -33,26 +39,27 @@
             font-weight: bold;
         }
 
-        /* Estilo para os botões */
-        .btn-primary {
-            background-color: #ff69b4;
-            border-color: #ff69b4;
+        /* Botões rosa blush para romance */
+        .btn-blush {
+            background-color: #d4afaf; /* Rosa blush */
+            border-color: #d4afaf;
+            color: #fff; /* Texto branco para contraste */
         }
 
-        .btn-primary:hover {
-            background-color: #ff85c0;
-            border-color: #ff85c0;
+        .btn-blush:hover {
+            background-color: #c49090;
+            border-color: #c49090;
         }
 
-        /* Rodapé */
+        /* Rodapé com verde suave para equilíbrio */
         footer {
-            background-color: #d2698b;
-            color: #fff;
+            background-color: #e0eee0; /* Verde suave */
+            color: #000;
         }
 
-        /* Estilo das seções */
+        /* Seções com toques de cinza claro/prata para elegância discreta */
         section {
-            background-color: #fff0f5;
+            background-color: #f0f0f0; /* Cinza claro */
             border-radius: 15px;
             padding: 2rem;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -66,22 +73,23 @@
 </head>
 <body>
     <header class="text-center py-5">
-        <h1 class="display-3">Ícaro e Tati</h1>
-        <p class="lead">Estamos felizes em compartilhar desse momento com você.</p>
+        <h1 class="display-1">Icaro e Tati</h1>
+        <h1 class="display-3">Estamos felizes em compartilhar esse momento com você.</h1>
+        <!--<p class="lead">Estamos felizes em compartilhar desse momento com você.</p>-->
     </header>
 
     <section class="container my-5">
         <div class="text-center">
-            <!-- Blocos empilhados verticalmente com tema rosa -->
-            <a href="vestimentas.php" class="btn btn-primary mb-3 d-block btn-lg-custom">Vestimentas</a>
-            <a href="datahoralocal.php" class="btn btn-primary mb-3 d-block btn-lg-custom">Data, Hora e Local</a>
-            <a href="presenteie.php" class="btn btn-primary mb-3 d-block btn-lg-custom">Presenteie</a>
-            <a href="mensagem.php" class="btn btn-primary mb-3 d-block btn-lg-custom">Deixe uma Mensagem</a>
+            <!-- Blocos empilhados verticalmente com tema rosa blush -->
+            <a href="vestimentas.php" class="btn btn-blush mb-3 d-block btn-lg-custom">Vestimentas</a>
+            <a href="datahoralocal.php" class="btn btn-blush mb-3 d-block btn-lg-custom">Data, Hora e Local</a>
+            <a href="presenteie.php" class="btn btn-blush mb-3 d-block btn-lg-custom">Presenteie</a>
+            <a href="mensagem.php" class="btn btn-blush mb-3 d-block btn-lg-custom">Deixe uma Mensagem</a>
         </div>
     </section>
 
-    <footer class="text-white text-center py-3">
-        <p class="mb-0">© 2024 Ícaro e Tati. Todos os direitos reservados.</p>
+    <footer class="text-center py-3">
+        <p class="mb-0">© 2024 Icaro e Tati. Todos os direitos reservados.</p>
     </footer>
 
     <!-- Bootstrap JS -->
