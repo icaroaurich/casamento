@@ -1,0 +1,176 @@
+<?php
+// Inclui o arquivo de conexão com o banco de dados
+include 'conexao.php';
+
+// Consulta SQL para selecionar todos os registros da tabela 'gastos'
+$sql = "SELECT * FROM gastos ORDER BY Gastos";
+
+// Executa a consulta
+$result = mysqli_query($conexao, $sql);
+
+// Verifica se a consulta retornou resultados
+if (mysqli_num_rows($result) > 0) {
+    // Início do HTML
+    echo '<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gastos - Ícaro e Tati</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .collapsible {
+            background-color: #6b81F0;
+            color: white;
+            cursor: pointer;
+            padding: 10px;
+            border: none;
+            text-align: left;
+            outline: none;
+            font-size: 16px;
+            width: 100%;
+        }
+
+        .active, .collapsible:hover {
+            background-color: #4650f0;
+        }
+
+        .collapsible:after {
+            content: "\\002B";
+            color: white;
+            font-weight: bold;
+            float: right;
+            margin-left: 5px;
+        }
+
+        .active:after {
+            content: "\\2212";
+        }
+
+        .content {
+            padding: 10px 18px;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.2s ease-out;
+            background-color: #f1f1f1;
+        }
+    </style>
+</head>
+<body>
+    <header class="bg-light text-center py-5">
+        <h1 class="display-3">Gastos</h1>
+    </header>
+
+    <section class="container my-5">
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Gastos</th>
+                        <th>Valor</th>
+                    </tr>
+                </thead>
+                <tbody>';
+
+    // Inicializa o totalizador
+    $total = 0;
+
+    // Itera sobre os resultados e cria as linhas da tabela
+    while ($row = mysqli_fetch_assoc($result)) {
+        $total += $row['Valor'];
+        $valorFormatado = number_format($row['Valor'], 2, ',', '.');
+
+        // Linha principal da tabela com um botão colapsável
+        echo '<tr>
+                <td>' . htmlspecialchars($row['idGastos']) . '</td>
+                <td>
+                    <button class="collapsible">' . htmlspecialchars($row['Gastos']) . '</button>
+                    <div class="content">
+                        <p>Mais detalhes sobre o gasto...</p>
+                    </div>
+                </td>
+                <td>R$ ' . htmlspecialchars($valorFormatado) . '</td>
+              </tr>';
+    }
+
+    // Adiciona a linha do totalizador
+    $totalFormatado = number_format($total, 2, ',', '.');
+    echo '<tr>
+            <td colspan="2" class="text-end"><strong>Total</strong></td>
+            <td><strong>R$ ' . htmlspecialchars($totalFormatado) . '</strong></td>
+          </tr>';
+
+    // Finaliza a tabela e o HTML
+    echo '    </tbody>
+            </table>
+        </div>
+
+        <!-- Botão para voltar ao planejamento.html -->
+        <div class="text-center my-4">
+            <a href="planejamento.html" class="btn btn-primary">Voltar para Planejamento</a>
+        </div>
+    </section>
+
+    <footer class="bg-dark text-white text-center py-3">
+        <p class="mb-0">© 2024 Ícaro e Tati. Todos os direitos reservados.</p>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        var coll = document.getElementsByClassName("collapsible");
+        var i;
+        for (i = 0; i < coll.length; i++) {
+            coll[i].addEventListener("click", function () {
+                this.classList.toggle("active");
+                var content = this.nextElementSibling;
+                if (content.style.maxHeight) {
+                    content.style.maxHeight = null;
+                } else {
+                    content.style.maxHeight = content.scrollHeight + "px";
+                }
+            });
+        }
+    </script>
+</body>
+</html>';
+} else {
+    // Caso não haja registros, exibe uma mensagem de "Nenhum gasto encontrado"
+    echo '<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gastos - Ícaro e Tati</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <header class="bg-light text-center py-5">
+        <h1 class="display-3">Gastos</h1>
+    </header>
+
+    <section class="container my-5">
+        <p class="text-center">Nenhum gasto encontrado.</p>
+
+        <!-- Botão para voltar ao planejamento.html -->
+        <div class="text-center my-4">
+            <a href="planejamento.html" class="btn btn-primary">Voltar para Planejamento</a>
+        </div>
+    </section>
+
+    <footer class="bg-dark text-white text-center py-3">
+        <p class="mb-0">© 2024 Ícaro e Tati. Todos os direitos reservados.</p>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>';
+}
+
+// Fecha a conexão com o banco de dados
+mysqli_close($conexao);
+?>

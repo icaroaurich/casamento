@@ -7,43 +7,115 @@
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
-        body {
-            font-size: 1.2rem; /* Aumenta o tamanho da fonte para todo o corpo */
+        /* Estilo adicional para botões maiores */
+        .btn-lg-custom {
+            font-size: 1.25rem;
+            padding: 1rem;
+            height: 80px; /* Altura maior dos botões */
         }
-        th, td {
-            font-size: 1.2rem; /* Aumenta o tamanho da fonte para cabeçalhos e células da tabela */
+
+        /* Fundo branco para simplicidade e pureza */
+        body {
+            background-color: #ffffff; /* Branco puro */
+            font-size: 1.5rem; /* Aumenta o tamanho da fonte para todo o corpo */
+        }
+
+        /* Cabeçalho com champagne para sofisticação */
+        header {
+            background-color: #f5deb3; /* Champagne */
+            color: #000; /* Cor do texto do cabeçalho em preto */
+        }
+
+        /* Destaque no nome dos noivos */
+        h1 {
+            font-family: 'Great Vibes', cursive; /* Fonte manuscrita */
+            color: #000; /* Nome dos noivos em preto */
+            font-size: 6rem; /* Tamanho ainda maior para destaque */
+        }
+
+        /* Rodapé com verde suave para equilíbrio */
+        footer {
+            background-color: #e0eee0; /* Verde suave */
+            color: #000;
+        }
+
+        /* Seções com toques de cinza claro/prata para elegância discreta */
+        section {
+            background-color: #f0f0f0; /* Cinza claro */
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Aumenta o tamanho da fonte das mensagens */
+        .message {
+            font-size: 1.9rem; /* Aumenta o tamanho do texto das mensagens */
         }
     </style>
 </head>
 <body>
-    <header class="bg-light text-center py-5">
-        <h1 class="display-4">Convite</h1>
+    <header class="text-center py-5">
+        <h1 class="display-0">Convite</h1>
+        <h1 class="display-1">Casamento de Ícaro e Tatiana</h1>
     </header>
 
     <section class="container my-5">
         <?php
         include 'conexao.php';
 
+        // Variáveis para data e hora do casamento
+        $data = "";
+        $hora = "";
+
+        // Consulta para obter a data e a hora do casamento
+        $sql_data_hora = "SELECT data FROM datahoralocal LIMIT 1"; // Obter data
+        $resultado_data_hora = mysqli_query($conexao, $sql_data_hora);
+
+        if ($resultado_data_hora) {
+            $row_data_hora = mysqli_fetch_assoc($resultado_data_hora);
+            if ($row_data_hora) { // Verifica se retornou algum resultado
+                $data_hora = $row_data_hora['data']; // Obtenha a data e hora
+
+                // Separar data e hora
+                $data = date('d-m-Y', strtotime($data_hora)); // Formato: 13-05-2025
+                $hora = date('H:i', strtotime($data_hora)); // Formato: 15:00
+            } else {
+                echo '<p class="text-danger">Nenhuma data ou hora encontrada.</p>';
+            }
+        } else {
+            echo '<p class="text-danger">Erro na consulta da data e hora: ' . mysqli_error($conexao) . '</p>';
+        }
+
         // Verifica se o parâmetro 'familia' foi passado na URL
         if (isset($_GET['familia'])) {
             $familia = intval($_GET['familia']); // Obtém o número da família
 
             // Consulta para buscar convidados pela família
-            $sql = "SELECT Nome, Parentesco FROM convidados WHERE Familia = $familia ORDER BY Nome";
+            $sql = "SELECT Nome FROM convidados WHERE Familia = $familia ORDER BY Nome";
             $resultado = mysqli_query($conexao, $sql);
+            $nomes = [];
 
-            if (mysqli_num_rows($resultado) > 0) {
-                echo '<table class="table table-striped">';
-                echo '<thead><tr><th>Nome</th><th>Parentesco</th></tr></thead>';
-                echo '<tbody>';
-                while($row = mysqli_fetch_assoc($resultado)) {
-                    echo '<tr><td>' . $row["Nome"] . '</td><td>' . $row["Parentesco"] . '</td></tr>';
-                }
-                echo '</tbody>';
-                echo '</table>';
-            } else {
-                echo '<p class="text-center">Nenhum convidado encontrado para essa família.</p>';
+            // Armazenar os nomes dos convidados em um array
+            while($row = mysqli_fetch_assoc($resultado)) {
+                $nomes[] = $row["Nome"];
             }
+
+            // Verifica a quantidade de convidados e monta a mensagem adequada
+            $contagem = count($nomes);
+
+            echo '<p class="message text-center">';
+            if ($contagem === 1) {
+                echo "<strong>{$nomes[0]}</strong>, você foi convidado para o casamento de <strong>Ícaro</strong> e <strong>Tati</strong>, no dia {$data} às {$hora} horas, contamos com sua presença!";
+            } elseif ($contagem === 2) {
+                echo "<strong>{$nomes[0]}</strong> e <strong>{$nomes[1]}</strong>, vocês foram convidados para o casamento de <strong>Ícaro</strong> e <strong>Tati</strong>, no dia {$data} às {$hora} horas, contamos com sua presença!";
+            } elseif ($contagem > 2) {
+                echo implode(', ', array_map(function($nome) {
+                    return "<strong>$nome</strong>"; // Envolve cada nome em negrito
+                }, array_slice($nomes, 0, -1))) . " e <strong>" . end($nomes) . "</strong>, vocês foram convidados para o casamento de <strong>Ícaro</strong> e <strong>Tati</strong>, no dia {$data} às {$hora} horas, contamos com sua presença!";
+            } else {
+                echo 'Nenhum convidado encontrado para essa família.';
+            }            
+            echo '</p>';
 
             // Botão para confirmar presença
             echo '<div class="text-center mt-4">';

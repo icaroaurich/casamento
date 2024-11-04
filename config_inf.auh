@@ -1,5 +1,0 @@
-@host = sql201.infinityfree.com;
-@usuario = if0_37054332;
-@senha = Isa16gmr;
-@bd = if0_37054332_gcim;
-@porta = 3306;
