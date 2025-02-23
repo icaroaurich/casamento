@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vestimenta dos Padrinhos</title>
+    <title>Presentes - Ícaro e Tati</title>
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Fonte manuscrita para os noivos -->
@@ -69,61 +69,41 @@
         .mb-3 {
             margin-bottom: 1.5rem !important;
         }
-
-        /* Garantindo que as imagens tenham a mesma proporção */
-        .img-fluid {
-            width: 100%;
-            height: auto;
-            max-height: 400px; /* Ajuste para altura máxima uniforme */
-            object-fit: cover; /* Mantém a proporção e cobre o espaço */
-        }
-
-        /* Título estilizado */
-        h1 {
-            font-size: 2.5rem;
-            font-weight: bold;
-            color: #000; /* Preto para o título */
-        }
-
-        /* Estilo para os títulos das imagens */
-        .image-title {
-            font-size: 1.5rem;
-            font-weight: bold;
-            margin-bottom: 0.5rem; /* Espaço entre o título e a imagem */
-        }
-
-        /* Estilo para o texto manuscrito */
-        .text-manuscrito {
-            font-family: 'Dancing Script', cursive; /* Fonte manuscrita */
-            font-size: 1.5rem; /* Tamanho da fonte */
-            margin-top: 1rem; /* Espaço acima do texto */
-        }
     </style>
 </head>
 <body>
     <header class="text-center py-5">
-        <h1 class="display-1">Vestimenta dos Padrinhos</h1>
+        <h1 class="display-1">Presentes</h1>
+        <h1 class="display-4">Para os que querem nos abençoar</h1>
     </header>
 
     <section class="container my-5">
-        <div class="text-center">
-            <div class="image-title">Madrinhas</div>
-            <img src="imagens/madrinha04.png" alt="Madrinhas" class="img-fluid mb-4">
-            <ul class="list-unstyled text-start mb-4" style="font-size: 1.5rem;">
-                <li>01 - Vestido cor Rose Gold</li>
-            </ul>
-            <div class="image-title">Padrinhos</div>
-            <img src="imagens/padrinhos06.png" alt="Padrinhos" class="img-fluid mb-4">
-            <ul class="list-unstyled text-start mb-4" style="font-size: 1.5rem;">
-                <li>01 - Colete bege</li>
-                <li>02 - Calça bege</li>
-				<li>03 - Camisa social Branca</li>
-				<li>04 - Gravata que entregamos</li>
-            </ul>
-        </div>
+        <div>
+            <?php
+            include 'conexao.php';
 
+            $sql = "SELECT item, abençoador FROM presentes ORDER BY item";
+            $resultado = mysqli_query($conexao, $sql);
+
+            if (mysqli_num_rows($resultado) > 0) {
+                echo '<table class="table table-striped">';
+                echo '<thead><tr><th>Item</th><th>Abençoador</th></tr></thead>';
+                echo '<tbody>';
+                while($row = mysqli_fetch_assoc($resultado)) {
+                    echo '<tr><td>' . $row["item"] . '</td><td>' . $row["abençoador"] . '</td></tr>';
+                }
+                echo '</tbody>';
+                echo '</table>';
+            } else {
+                echo '<p class="text-center">Nenhum presente encontrado.</p>';
+            }
+
+            mysqli_close($conexao);
+            ?>
+        </div>
+        
         <div class="text-center mt-4">
-            <a href="index.html" class="btn btn-blush mb-3 d-block btn-lg-custom">Voltar para o início</a>
+            <a href="index.html" class="btn btn-secondary">Voltar para Início</a>
         </div>
     </section>
 
