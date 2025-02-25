@@ -31,6 +31,7 @@
             <a href="planejamento.html" class="btn btn-primary mb-3 d-block btn-lg-custom">Planejamento</a>
             <a href="crud_presenteie.php" class="btn btn-primary mb-3 d-block btn-lg-custom">Presentes</a>
             <a href="crud_convidados.php" class="btn btn-primary mb-3 d-block btn-lg-custom">Convidados</a>
+            <a href="crud_padrinhos.php" class="btn btn-primary mb-3 d-block btn-lg-custom">Padrinhos</a>
         </div>
     </section>
 
