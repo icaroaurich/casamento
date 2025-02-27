@@ -13,6 +13,12 @@
             padding: 1rem;
             height: 80px; /* Altura maior dos botões */
         }
+		
+		.btn-blush {
+            background-color: #d4afaf;
+            border-color: #d4afaf;
+            color: #fff;
+        }
 
         /* Fundo branco para simplicidade e pureza */
         body {
@@ -142,6 +148,12 @@
 
         mysqli_close($conexao);
         ?>
+        
+        <!-- Botão Voltar para a página inicial -->
+        <div class="text-center mt-4">
+            <a href="index.html" class="btn btn-blush">Ir para página inicial</a>
+        </div>
+
     </section>
 
     <footer class="bg-dark text-white text-center py-3">

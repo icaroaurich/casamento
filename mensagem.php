@@ -15,6 +15,11 @@
             padding: 1rem;
             height: 80px; /* Altura maior dos botões */
         }
+		.btn-blush {
+            background-color: #d4afaf; /* Rosa blush */
+            border-color: #d4afaf;
+            color: #fff; /* Texto branco para contraste */
+        }
 
         /* Fundo branco para simplicidade e pureza */
         body {
@@ -74,7 +79,7 @@
                 <textarea class="form-control" id="mensagem" name="mensagem" rows="3" maxlength="200" required></textarea>
                 <div class="error" id="charCount"></div>
             </div>
-            <button type="submit" class="btn btn-primary">Enviar</button>
+            <button type="submit" class="btn btn-blush btn-lg-custom d-block w-100">Enviar</button>
         </form>
 
         <?php
@@ -96,11 +101,11 @@
         ?>
         
         <div class="text-center mt-4">
-            <a href="index.html" class="btn btn-secondary">Voltar para a Página Inicial</a>
+            <a href="index.html" class="btn btn-blush mb-3 d-block btn-lg-custom">Voltar para o início</a>
         </div>
     </section>
 
-    <footer class="bg-dark text-white text-center py-3">
+    <footer class="text-center py-3">
         <p class="mb-0">© 2024 Ícaro e Tati. Todos os direitos reservados.</p>
     </footer>
 

@@ -8,9 +8,10 @@ if (isset($_POST['update'])) {
     $item = $_POST['item'];
     $grupo = $_POST['grupo'];
     $ganhamos = $_POST['ganhamos'];
+	$abencoador = $_POST['abencoador'];
 
     // Atualizar o registro
-    $sql = "UPDATE presentes SET item='$item', grupo='$grupo', ganhamos='$ganhamos' WHERE idPresentes='$idPresentes'";
+    $sql = "UPDATE presentes SET item='$item', grupo='$grupo', ganhamos='$ganhamos', abencoador='$abencoador' WHERE idPresentes='$idPresentes'";
     if (mysqli_query($conexao, $sql)) {
         echo "Registro atualizado com sucesso!";
     } else {
@@ -47,7 +48,7 @@ if (isset($_POST['add'])) {
 }
 
 // Consultar todos os registros da tabela 'presentes'
-$sql = "SELECT idPresentes, item, grupo, ganhamos FROM presentes ORDER BY grupo, item";
+$sql = "SELECT idPresentes, item, grupo, ganhamos, abencoador FROM presentes ORDER BY grupo, item";
 $resultado = mysqli_query($conexao, $sql);
 ?>
 
@@ -73,6 +74,7 @@ $resultado = mysqli_query($conexao, $sql);
                         <th>Item</th>
                         <th>Grupo</th>
                         <th>Ganhamos</th>
+						<th>Abençoador</th>
                         <th>Ações</th>
                     </tr>
                 </thead>
@@ -91,6 +93,7 @@ $resultado = mysqli_query($conexao, $sql);
                                 <option value='0' " . ($row['ganhamos'] == 0 ? 'selected' : '') . ">Não</option>
                             </select>
                         </td>
+						<td><input type='text' name='abencoador' value='" . $row["abencoador"] . "' class='form-control'></td>
                         <td>
                             <input type='hidden' name='idPresentes' value='" . $row["idPresentes"] . "'>
                             <button type='submit' name='update' class='btn btn-primary'>Salvar</button>
@@ -121,8 +124,8 @@ $resultado = mysqli_query($conexao, $sql);
             <div class="mb-3">
                 <label for="ganhamos" class="form-label">Ganhamos</label>
                 <select class="form-control" id="ganhamos" name="ganhamos" required>
-                    <option value="1">Sim</option>
                     <option value="0">Não</option>
+                    <option value="1">Sim</option>
                 </select>
             </div>
             <button type="submit" name="add" class="btn btn-success">Adicionar</button>
